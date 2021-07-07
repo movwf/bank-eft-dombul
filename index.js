@@ -824,6 +824,54 @@ const TimeOutDialog = () => {
   };
 };
 
+const showModal = (modalType) => {
+  // Render modal backdrop
+  DombulDOM.render(ModalBackdrop(), document.getElementById("root"));
+
+  switch (modalType) {
+    case "TIMEOUT":
+      DombulDOM.render(
+        TimeOutDialog(),
+        document.getElementById("jsModalBackdrop")
+      );
+      window.feather.replace();
+      break;
+    case "PIN":
+      DombulDOM.render(PINDialog(), document.getElementById("jsModalBackdrop"));
+      window.feather.replace();
+      window["jsTimerPIN"] = 120;
+      startTimer("jsTimerPIN");
+      break;
+    case "SUCCESS":
+      DombulDOM.render(
+        SuccessDialog(),
+        document.getElementById("jsModalBackdrop")
+      );
+      window.feather.replace();
+      break;
+    default:
+      break;
+  }
+};
+
+const closeModal = () => {
+  let root = document.getElementById("root");
+  let modal = document.getElementById("jsModalBackdrop");
+  // Delete from DOM Tree
+  root.removeChild(modal);
+};
+
+const ModalBackdrop = () => {
+  return {
+    type: "div",
+    props: {
+      id: "jsModalBackdrop",
+      className:
+        "fixed z-10 top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex flex-col items-center justify-center",
+    },
+  };
+};
+
 const Toggle = (elementId) => {
   let element = document.getElementById(elementId);
   let prevClass = element.className;
