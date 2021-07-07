@@ -533,4 +533,57 @@ const App = () => {
   };
 };
 
+const Toggle = (elementId) => {
+  let element = document.getElementById(elementId);
+  let prevClass = element.className;
+  let hideElement = prevClass.split(" ").includes("hidden");
+
+  if (!hideElement) {
+    // Hide
+    element.className += " hidden";
+  } else {
+    // Show
+    element.className = prevClass
+      .split(" ")
+      .filter((className) => className !== "hidden")
+      .join(" ");
+  }
+};
+
+const startTimer = (timerId) => {
+  window[timerId] = 120;
+  let displayTimer = document.getElementById(timerId);
+  let startTimer = setInterval(() => {
+    window[timerId]--;
+
+    displayTimer.innerText = showTimer(window[timerId]);
+
+    if (window[timerId] == 0) {
+      clearInterval(startTimer);
+      // If time runs out on PIN modal
+      if (document.getElementById("jsModalBackdrop") != null) {
+        closeModal();
+      }
+      showModal("TIMEOUT");
+    }
+  }, 1000);
+};
+
+const showTimer = (timeInSeconds) => {
+  let sec = timeInSeconds % 60;
+  let min = Math.floor(timeInSeconds / 60);
+
+  if (sec == 0) {
+    sec = "00";
+  }
+
+  if (min < 10) {
+    return "0" + min + ":" + sec;
+  } else {
+    return min + ":" + sec;
+  }
+};
+
 DombulDOM.render(App(), document.getElementById("root"));
+
+// startTimer("jsTimer");
