@@ -54,7 +54,9 @@ const App = () => {
                                   type: "button",
                                   props: {
                                     id: "jsAccountSelect",
-                                    onClick: () => {},
+                                    onClick: () => {
+                                      Toggle("jsAccountDropDown");
+                                    },
                                     className:
                                       "relative w-full bg-white rounded-md shadow-lg pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition",
                                     children: [
@@ -117,6 +119,7 @@ const App = () => {
                                                 id: "account-option-1",
                                                 role: "option",
                                                 onClick: () => {
+                                                  Toggle("jsAccountDropDown");
                                                   document.getElementById(
                                                     "jsSelectedAccounIBAN"
                                                   ).innerText =
@@ -178,6 +181,7 @@ const App = () => {
                                                 id: "account-option-2",
                                                 role: "option",
                                                 onClick: () => {
+                                                  Toggle("jsAccountDropDown");
                                                   document.getElementById(
                                                     "jsSelectedAccounIBAN"
                                                   ).innerText =
@@ -503,7 +507,9 @@ const App = () => {
                             type: "button",
                             props: {
                               id: "jsSendButton",
-                              onClick: () => {},
+                              onClick: () => {
+                                showModal("PIN");
+                              },
                               className:
                                 "h-[40px] py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-36 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
                               innerText: "Send",
@@ -658,7 +664,9 @@ const PINDialog = () => {
                           {
                             type: "button",
                             props: {
-                              onClick: () => {},
+                              onClick: () => {
+                                closeModal();
+                              },
                               className:
                                 "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
                               innerText: "Submit",
@@ -736,7 +744,9 @@ const SuccessDialog = () => {
                           {
                             type: "button",
                             props: {
-                              onClick: () => {},
+                              onClick: () => {
+                                closeModal();
+                              },
                               className:
                                 "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
                               innerText: "Close",
@@ -807,7 +817,9 @@ const TimeOutDialog = () => {
                     {
                       type: "button",
                       props: {
-                        onClick: () => {},
+                        onClick: () => {
+                          closeModal();
+                        },
                         className:
                           "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
                         innerText: "Close",
