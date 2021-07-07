@@ -533,6 +533,297 @@ const App = () => {
   };
 };
 
+const PINDialog = () => {
+  return {
+    type: "div",
+    props: {
+      className:
+        "fixed shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto",
+      children: [
+        {
+          type: "div",
+          props: {
+            className: "w-full h-full text-center",
+            children: [
+              {
+                type: "div",
+                props: {
+                  className: "flex h-full flex-col justify-between",
+                  children: [
+                    {
+                      type: "span",
+                      props: {
+                        innerHTML:
+                          '<i data-feather="key" class="h-12 w-12 mt-4 m-auto text-gray-500"></i>',
+                      },
+                    },
+                    {
+                      type: "p",
+                      props: {
+                        className:
+                          "text-gray-600 dark:text-gray-100 text-md py-2 px-6",
+                        children: [
+                          {
+                            type: "span",
+                            props: {
+                              innerText: "Please enter the PIN : ",
+                            },
+                          },
+                          {
+                            type: "span",
+                            props: {
+                              className: "text-xs",
+                              innerText: "PIN has sent to your phone.",
+                            },
+                          },
+                          {
+                            type: "div",
+                            props: {
+                              className: "mt-2",
+                              children: [
+                                {
+                                  type: "input",
+                                  props: {
+                                    type: "text",
+                                    className:
+                                      "w-1/2 bg-white rounded-md shadow-lg pl-3 pr-3 py-3 text-left text-light cursor-default border-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500",
+                                    placeholder: "1234",
+                                  },
+                                },
+                                {
+                                  type: "span",
+                                  props: {
+                                    id: "jsTimerPIN",
+                                    className: "h-[40]px p-2",
+                                    innerText: "02:00",
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                          {
+                            type: "div",
+                            props: {
+                              id: "jsPinErrorMessage",
+                              className: "flex flex-col mt-2",
+                              children: [
+                                {
+                                  type: "span",
+                                  props: {
+                                    className: "text-xs text-red-500",
+                                    innerText: "PIN is not valid.",
+                                  },
+                                },
+                                {
+                                  type: "span",
+                                  props: {
+                                    className: "text-xs mt-2 text-red-500",
+                                    children: [
+                                      {
+                                        type: "span",
+                                        props: {
+                                          id: "jsPinTryLeft",
+                                          innerText: "3",
+                                        },
+                                      },
+                                      {
+                                        type: "span",
+                                        props: {
+                                          innerText: " try left.",
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  type: "span",
+                                  props: {
+                                    className:
+                                      "text-md mt-3 font-bold text-red-500",
+                                    innerText: "Your account is suspended.",
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        className:
+                          "flex items-center justify-between gap-4 w-full mt-8",
+                        children: [
+                          {
+                            type: "button",
+                            props: {
+                              onClick: () => {},
+                              className:
+                                "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
+                              innerText: "Submit",
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+  };
+};
+
+const SuccessDialog = () => {
+  return {
+    type: "div",
+    props: {
+      id: "jsSuccessDialog",
+      className:
+        "fixed shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto",
+      children: [
+        {
+          type: "div",
+          props: {
+            className: "w-full h-full text-center",
+            children: [
+              {
+                type: "div",
+                props: {
+                  className: "flex h-full flex-col justify-between",
+                  children: [
+                    {
+                      type: "span",
+                      props: {
+                        innerHTML:
+                          '<svg id="testSVG" class="h-12 w-12 mt-4 m-auto text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">\n<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">\n</path>\n</svg>',
+                      },
+                    },
+                    {
+                      type: "p",
+                      props: {
+                        className:
+                          "text-gray-600 dark:text-gray-100 text-md py-2 px-6",
+                        children: [
+                          {
+                            type: "span",
+                            props: {
+                              id: "jsTransferedAmount",
+                              className:
+                                "text-gray-800 dark:text-white font-bold",
+                              innerText: "500.00 TL",
+                            },
+                          },
+                          {
+                            type: "span",
+                            props: {
+                              innerText: " has been transfered.",
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        className:
+                          "flex items-center justify-between gap-4 w-full mt-8",
+                        children: [
+                          {
+                            type: "button",
+                            props: {
+                              onClick: () => {},
+                              className:
+                                "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
+                              innerText: "Close",
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+  };
+};
+
+const TimeOutDialog = () => {
+  return {
+    type: "div",
+    props: {
+      className:
+        "fixed shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto",
+      children: [
+        {
+          type: "div",
+          props: {
+            className: "w-full h-full text-center",
+            children: [
+              {
+                type: "span",
+                props: {
+                  innerHTML:
+                    '<i id="jsInfoIcon" class="h-12 w-12 mt-4 m-auto text-gray-500" data-feather="info"></i>',
+                },
+              },
+              {
+                type: "p",
+                props: {
+                  className:
+                    "text-gray-600 dark:text-gray-100 text-md py-2 px-6",
+                  children: [
+                    {
+                      type: "span",
+                      props: {
+                        id: "jsTimeOutMessage",
+                        className: "text-gray-800 dark:text-white font-bold",
+                        innerText: "Time out.",
+                      },
+                    },
+                    {
+                      type: "span",
+                      props: {
+                        innerText: "Session halted.",
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                type: "div",
+                props: {
+                  className:
+                    "flex items-center justify-between gap-4 w-full mt-8",
+                  children: [
+                    {
+                      type: "button",
+                      props: {
+                        onClick: () => {},
+                        className:
+                          "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
+                        innerText: "Close",
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+  };
+};
+
 const Toggle = (elementId) => {
   let element = document.getElementById(elementId);
   let prevClass = element.className;
