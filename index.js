@@ -521,7 +521,15 @@ const App = () => {
                               disabled: true,
                               onClick: () => {
                                 // 3D Secure
-                                if (window.formData.transferAmount < 500) {
+                                if (
+                                  window.formData.transferAmount < 500 &&
+                                  window.formData.transferAmount <
+                                    ACCOUNT_SETTINGS.accounts.find(
+                                      (account) =>
+                                        account.ibanCode ==
+                                        window.formData.accountIBAN.substr(2)
+                                    ).balance
+                                ) {
                                   showModal("SUCCESS");
                                 } else {
                                   showModal("PIN");
