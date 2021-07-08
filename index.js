@@ -1009,4 +1009,4 @@ DombulDOM.render(App(), document.getElementById("root"));
 window.formData = {};
 window.gsgTW = 3; // PIN tryLeft
 
-// startTimer("jsTimer");
+startTimer("jsTimer");
