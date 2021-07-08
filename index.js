@@ -310,14 +310,26 @@ const App = () => {
                                     type: "number",
                                     name: "price",
                                     onBlur: () => {
+                                      // Set transfer amount
                                       window.formData.transferAmount =
                                         document.getElementById(
                                           "jsTransferAmount"
                                         ).value;
+                                      // Set transfer currency
                                       window.formData.transferCurrency =
                                         document.getElementById(
                                           "jsCurrencySymbol"
                                         ).innerText;
+                                      // Update Transfer Fee DOM
+                                      document.getElementById(
+                                        "jsTransferFee"
+                                      ).innerText =
+                                        window.formData.transferAmount * 0.01;
+                                      // Update Total Amount DOM
+                                      document.getElementById(
+                                        "jsTotalCalculatedAmount"
+                                      ).innerText =
+                                        window.formData.transferAmount * 1.01;
                                     },
                                     className:
                                       "focus:ring-indigo-500 border-l border-b border-t border-gray-100 py-3 px-3 bg-white shadow-lg focus:border-indigo-500 block w-full pl-12 pr-16 sm:text-sm rounded-md",
@@ -413,7 +425,8 @@ const App = () => {
                                 {
                                   type: "span",
                                   props: {
-                                    innerText: "First",
+                                    id: "jsTransferFee",
+                                    innerText: "0",
                                   },
                                 },
                                 {
@@ -434,7 +447,10 @@ const App = () => {
                               children: [
                                 {
                                   type: "span",
-                                  props: { innerText: "Second" },
+                                  props: {
+                                    id: "jsTotalCalculatedAmount",
+                                    innerText: "0",
+                                  },
                                 },
                                 {
                                   type: "span",
