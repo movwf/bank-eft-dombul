@@ -673,6 +673,7 @@ const PINDialog = () => {
                                 {
                                   type: "span",
                                   props: {
+                                    id: "jsSuspendedMessage",
                                     className:
                                       "text-md mt-3 font-bold text-red-500 hidden",
                                     innerText: "Your account is suspended.",
@@ -712,9 +713,14 @@ const PINDialog = () => {
                                   if (window.gsgTW == 0) {
                                     // Stop Timer
                                     clearInterval(window.startTimer);
+
+                                    Toggle("jsSuspendedMessage");
+
                                     // Show exit modal
-                                    closeModal();
-                                    showModal("TIMEOUT");
+                                    setTimeout(() => {
+                                      closeModal();
+                                      showModal("TIMEOUT");
+                                    }, 2000);
                                   }
                                 }
                               },
