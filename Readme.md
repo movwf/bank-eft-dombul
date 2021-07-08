@@ -1,15 +1,15 @@
-### ODEV ONCESI
-Eğer bu repoyu kullanarak kendi bilgisayarinizda development yapmak isterseniz sirasiyla,
-1) Repoyu clonelayin
-2) yarn veya npm install komutunu calistirin (Sadece birisi)
-3) yarn start veya npm start komutunu calistirin (sadece birisi)
+### Basit EFT Arayüzü
 
-index.js'e ve index.html'e kod yazarak baslayabilirsiniz. yarn start yaptiysaniz degisiklikleriniz otomatik olarak ekranda gorulmeli. Sorun yasarsaniz asistanlari bulun.
+- JS
+- Dombul-DOM (Kendi DOM Kütüphanem)
+- Parcel
+- TailwindCSS
 
-Eger bu repoyu kullanmadan (parcel olmadan) kullanmak istiyorsaniz;
+kullanılarak tamamlanmıştır.
 
-1) Codesandbox.com 'u kullanabilirsiniz
-2) direk index.html'e yazarak calistirabilirsiniz.
+> Screenshot
+
+![App Screen](https://i.ibb.co/wrhPxs0/image.png)
 
 
 ODEV
