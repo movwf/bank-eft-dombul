@@ -748,7 +748,10 @@ const SuccessDialog = () => {
                               id: "jsTransferedAmount",
                               className:
                                 "text-gray-800 dark:text-white font-bold",
-                              innerText: "500.00 TL",
+                              innerText:
+                                window.formData.transferAmount +
+                                " " +
+                                window.formData.transferCurrency,
                             },
                           },
                           {
