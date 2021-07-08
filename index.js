@@ -1,5 +1,5 @@
 import { DombulDOM } from "dombul-dom";
-import ACCOUNT_SETTINGS from "./config/user_information";
+import ACCOUNT_SETTINGS, { AUTH_CODE } from "./config/user_information";
 
 const App = () => {
   return {
@@ -616,9 +616,13 @@ const PINDialog = () => {
                                   type: "input",
                                   props: {
                                     type: "text",
+                                    maxLength: 4,
+                                    onBlur: (e) => {
+                                      window.formData.authCode = e.target.value;
+                                    },
                                     className:
                                       "w-1/2 bg-white rounded-md shadow-lg pl-3 pr-3 py-3 text-left text-light cursor-default border-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500",
-                                    placeholder: "1234",
+                                    placeholder: "xxxx",
                                   },
                                 },
                                 {
@@ -636,7 +640,7 @@ const PINDialog = () => {
                             type: "div",
                             props: {
                               id: "jsPinErrorMessage",
-                              className: "flex flex-col mt-2",
+                              className: "flex flex-col mt-2 hidden",
                               children: [
                                 {
                                   type: "span",
@@ -654,7 +658,7 @@ const PINDialog = () => {
                                         type: "span",
                                         props: {
                                           id: "jsPinTryLeft",
-                                          innerText: "3",
+                                          innerText: 3,
                                         },
                                       },
                                       {
@@ -670,7 +674,7 @@ const PINDialog = () => {
                                   type: "span",
                                   props: {
                                     className:
-                                      "text-md mt-3 font-bold text-red-500",
+                                      "text-md mt-3 font-bold text-red-500 hidden",
                                     innerText: "Your account is suspended.",
                                   },
                                 },
@@ -690,7 +694,29 @@ const PINDialog = () => {
                             type: "button",
                             props: {
                               onClick: () => {
-                                closeModal();
+                                if (window.formData.authCode === AUTH_CODE) {
+                                  closeModal();
+                                  showModal("SUCCESS");
+                                } else {
+                                  if (window.gsgTW == 3) {
+                                    Toggle("jsPinErrorMessage");
+                                  }
+                                  // tryLeft
+                                  window.gsgTW--;
+
+                                  // Update DOM
+                                  document.getElementById(
+                                    "jsPinTryLeft"
+                                  ).innerText = window.gsgTW;
+
+                                  if (window.gsgTW == 0) {
+                                    // Stop Timer
+                                    clearInterval(window.startTimer);
+                                    // Show exit modal
+                                    closeModal();
+                                    showModal("TIMEOUT");
+                                  }
+                                }
                               },
                               className:
                                 "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
@@ -932,13 +958,13 @@ const Toggle = (elementId) => {
 const startTimer = (timerId) => {
   window[timerId] = 120;
   let displayTimer = document.getElementById(timerId);
-  let startTimer = setInterval(() => {
+  window.startTimer = setInterval(() => {
     window[timerId]--;
 
     displayTimer.innerText = showTimer(window[timerId]);
 
     if (window[timerId] == 0) {
-      clearInterval(startTimer);
+      clearInterval(window.startTimer);
       // If time runs out on PIN modal
       if (document.getElementById("jsModalBackdrop") != null) {
         closeModal();
@@ -975,5 +1001,6 @@ const validateEntry = () => {
 DombulDOM.render(App(), document.getElementById("root"));
 
 window.formData = {};
+window.gsgTW = 3; // PIN tryLeft
 
 // startTimer("jsTimer");
