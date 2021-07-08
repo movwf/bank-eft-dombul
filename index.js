@@ -1,4 +1,5 @@
 import { DombulDOM } from "dombul-dom";
+import ACCOUNT_SETTINGS from "./config/user_information";
 
 const App = () => {
   return {
@@ -71,8 +72,7 @@ const App = () => {
                                                 id: "jsSelectedAccounIBAN",
                                                 className:
                                                   "ml-3 block font-bold truncate",
-                                                innerText:
-                                                  "TR76 1102 1201 1030 0000 1234 01",
+                                                innerText: "Select Account",
                                               },
                                             },
                                           ],
@@ -112,132 +112,81 @@ const App = () => {
                                           tabIndex: -1,
                                           className:
                                             "max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm",
-                                          children: [
-                                            {
-                                              type: "li",
-                                              props: {
-                                                id: "account-option-1",
-                                                role: "option",
-                                                onClick: () => {
-                                                  Toggle("jsAccountDropDown");
-                                                  document.getElementById(
-                                                    "jsSelectedAccounIBAN"
-                                                  ).innerText =
-                                                    "TR76 1102 1201 1030 0000 1234 01";
-                                                },
-                                                className:
-                                                  "text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9",
-                                                children: [
-                                                  {
-                                                    type: "div",
-                                                    props: {
-                                                      className:
-                                                        "flex flex-col",
-                                                      children: [
-                                                        {
-                                                          type: "span",
-                                                          props: {
-                                                            id: "jsAccountOption-1-IBAN",
-                                                            className:
-                                                              "ml-3 block font-bold text-xs truncate",
-                                                            innerText:
-                                                              "TR76 1102 1201 1030 0000 1234 01",
-                                                          },
-                                                        },
-                                                        {
-                                                          type: "span",
-                                                          props: {
-                                                            className:
-                                                              "flex flex-row justify-between ml-3 block font-normal text-xs truncate",
-                                                            children: [
-                                                              {
-                                                                type: "span",
-                                                                props: {
-                                                                  id: "jsAccountOption-1-Balance",
-                                                                  innerText:
-                                                                    "3162.90 TL",
-                                                                },
-                                                              },
-                                                              {
-                                                                type: "span",
-                                                                props: {
-                                                                  id: "jsAccountOption-1-Type",
-                                                                  innerText:
-                                                                    "TL/Vadeli",
-                                                                },
-                                                              },
-                                                            ],
-                                                          },
-                                                        },
-                                                      ],
+                                          children:
+                                            ACCOUNT_SETTINGS.accounts.map(
+                                              (account) => {
+                                                return {
+                                                  type: "li",
+                                                  props: {
+                                                    id:
+                                                      "account-option-" +
+                                                      account.accountCode,
+                                                    role: "option",
+                                                    onClick: () => {
+                                                      Toggle(
+                                                        "jsAccountDropDown"
+                                                      );
+                                                      document.getElementById(
+                                                        "jsSelectedAccounIBAN"
+                                                      ).innerText =
+                                                        account.ibanNationality +
+                                                        account.ibanCode;
                                                     },
-                                                  },
-                                                ],
-                                              },
-                                            },
-                                            {
-                                              type: "li",
-                                              props: {
-                                                id: "account-option-2",
-                                                role: "option",
-                                                onClick: () => {
-                                                  Toggle("jsAccountDropDown");
-                                                  document.getElementById(
-                                                    "jsSelectedAccounIBAN"
-                                                  ).innerText =
-                                                    "TR77 8956 5165 1651 6515 6153 02";
-                                                },
-                                                className:
-                                                  "text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9",
-                                                children: [
-                                                  {
-                                                    type: "div",
-                                                    props: {
-                                                      className:
-                                                        "flex flex-col",
-                                                      children: [
-                                                        {
-                                                          type: "span",
-                                                          props: {
-                                                            id: "jsAccountOption-2-IBAN",
-                                                            className:
-                                                              "ml-3 block font-bold text-xs truncate",
-                                                            innerText:
-                                                              "TR77 8956 5165 1651 6515 6153 02",
-                                                          },
-                                                        },
-                                                        {
-                                                          type: "span",
-                                                          props: {
-                                                            className:
-                                                              "flex flex-row justify-between ml-3 block font-normal text-xs truncate",
-                                                            children: [
-                                                              {
-                                                                type: "span",
-                                                                props: {
-                                                                  id: "jsAccountOption-2-Balance",
-                                                                  innerText:
-                                                                    "232.95 EUR",
-                                                                },
+                                                    className:
+                                                      "text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9",
+                                                    children: [
+                                                      {
+                                                        type: "div",
+                                                        props: {
+                                                          className:
+                                                            "flex flex-col",
+                                                          children: [
+                                                            {
+                                                              type: "span",
+                                                              props: {
+                                                                id: "jsAccountOption-1-IBAN",
+                                                                className:
+                                                                  "ml-3 block font-bold text-xs truncate",
+                                                                innerText:
+                                                                  account.ibanNationality +
+                                                                  account.ibanCode,
                                                               },
-                                                              {
-                                                                type: "span",
-                                                                props: {
-                                                                  id: "jsAccountOption-2-Type",
-                                                                  innerText:
-                                                                    "EUR/Vadesiz",
-                                                                },
+                                                            },
+                                                            {
+                                                              type: "span",
+                                                              props: {
+                                                                className:
+                                                                  "flex flex-row justify-between ml-3 block font-normal text-xs truncate",
+                                                                children: [
+                                                                  {
+                                                                    type: "span",
+                                                                    props: {
+                                                                      id: "jsAccountOption-1-Balance",
+                                                                      innerText:
+                                                                        account.balance +
+                                                                        " " +
+                                                                        account.currency,
+                                                                    },
+                                                                  },
+                                                                  {
+                                                                    type: "span",
+                                                                    props: {
+                                                                      id: "jsAccountOption-1-Type",
+                                                                      innerText:
+                                                                        account.type,
+                                                                    },
+                                                                  },
+                                                                ],
                                                               },
-                                                            ],
-                                                          },
+                                                            },
+                                                          ],
                                                         },
-                                                      ],
-                                                    },
+                                                      },
+                                                    ],
                                                   },
-                                                ],
-                                              },
-                                            },
-                                          ],
+                                                };
+                                              }
+                                            ),
                                         },
                                       },
                                     ],
