@@ -69,7 +69,7 @@ const App = () => {
                                             {
                                               type: "span",
                                               props: {
-                                                id: "jsSelectedAccounIBAN",
+                                                id: "jsSelectedAccountIBAN",
                                                 className:
                                                   "ml-3 block font-bold truncate",
                                                 innerText: "Select Account",
@@ -126,11 +126,18 @@ const App = () => {
                                                       Toggle(
                                                         "jsAccountDropDown"
                                                       );
+                                                      // Update Selected Input
                                                       document.getElementById(
-                                                        "jsSelectedAccounIBAN"
+                                                        "jsSelectedAccountIBAN"
                                                       ).innerText =
                                                         account.ibanNationality +
                                                         account.ibanCode;
+                                                      // Set Form Data
+                                                      window.formData.accountIBAN =
+                                                        account.ibanNationality +
+                                                        account.ibanCode;
+                                                      // Validate if account/recipient both set
+                                                      validateEntry();
                                                     },
                                                     className:
                                                       "text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9",
@@ -218,9 +225,19 @@ const App = () => {
                                 {
                                   type: "input",
                                   props: {
+                                    id: "jsRecipient",
                                     type: "text",
+                                    onBlur: () => {
+                                      // Set formData
+                                      window.formData.recipient =
+                                        document.getElementById(
+                                          "jsRecipient"
+                                        ).value;
+                                      // Validate if account/recipient both set
+                                      validateEntry();
+                                    },
                                     className:
-                                      "relative w-full bg-white rounded-md shacd ..w-lg pl-3 pr-3 py-3 text-left text-light cursor-default border-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                      "relative w-full bg-white rounded-md w-lg pl-3 pr-3 py-3 text-left text-light cursor-default border-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
                                     placeholder:
                                       "TR72 xxxx xxxx xxxx xxxx xxxx xx",
                                   },
@@ -456,11 +473,12 @@ const App = () => {
                             type: "button",
                             props: {
                               id: "jsSendButton",
+                              disabled: true,
                               onClick: () => {
                                 showModal("PIN");
                               },
                               className:
-                                "h-[40px] py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-36 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg",
+                                "h-[40px] py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-36 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 rounded-lg",
                               innerText: "Send",
                               // children: [
                               //   {
@@ -884,6 +902,17 @@ const showTimer = (timeInSeconds) => {
   }
 };
 
+const validateEntry = () => {
+  if (
+    window.formData.hasOwnProperty("recipient") &&
+    window.formData.hasOwnProperty("accountIBAN")
+  ) {
+    document.getElementById("jsSendButton").disabled = false;
+  }
+};
+
 DombulDOM.render(App(), document.getElementById("root"));
+
+window.formData = {};
 
 // startTimer("jsTimer");
